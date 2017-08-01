@@ -1,18 +1,17 @@
 <div class="container">
-  <h1 >Sign up your team</h1>
+  <h1 >Post a Contract</h1>
+  <h2>Use a Descriptive Title so Users can find your posting<br>
+    As Albion is a Sandbox MMO, your services provided or required are up to you</h2> 
   <table class="table table-bordered" style="border-radius: 5px">
     <tr>
-      <td style="padding-bottom: 22px;width: 33%;text-align: center" class="success">
-       <h3><i class="fa fa-check" aria-hidden="true" style="color: #5cb85c"></i> <strong class="step" style="font-size:24px">Completed</strong></h3>
-       Create personal account  
+      <td style="padding-bottom: 22px;width: 33%;text-align: center">
+       <h3><i class="fa fa-truck" aria-hidden="true" style="color: #5cb85c"></i> <strong class="step" style="font-size:24px">Transportation </strong></h3> 
      </td>
      <td style="padding-bottom: 22px;width: 33%;text-align: center">
-      <h3><i class="fa fa-users" aria-hidden="true" style="color: #337ab7"></i> <strong class="step" style="font-size:24px">Step 2</strong></h3>
-      Create organization
+      <h3><i class="fa fa-users" aria-hidden="true" style="color: #ff0000"></i> <strong class="step" style="font-size:24px">Mercenaries</strong></h3>
     </td>
     <td style="padding-bottom: 22px;width: 33%;text-align: center">
-     <h3><strong class="step" style="font-size:24px">Step 3</strong></h3>
-     Invite members 
+     <h3><i class="fa fa-shield" arai-hidden="true" style="color: #337ab7"></i> <strong class="step" style="font-size:24px">Protection</strong></h3> 
    </td>
  </tr>
 </table>
@@ -30,31 +29,30 @@
   {{/each}}
 </div>
 {{/if}}
-<h3>Create an organization account.</h3>
+<h3>Post a Contract Opportunity</h3>
 <hr>
-<form method="POST" action="/organizations/new" class="form-horizontal">
+<form method="POST" action="/contracts/new" class="form-horizontal">
   <div class="row">
     <div class="col-md-7">
       <div class="form-group" id="nameGroup">
-        <label for="name" class="col-md-12">Organization name </label>
+        <label for="title" class="col-md-12">Contract Title</label>
         <div class="col-md-12">
           <div id="errmsg" style="font-size: 12px;color: red"></div> 
-          <input type="text" name="name" id="name" class="form-control" value="">
-          <p class="help-block"><small>The organization account will live at {{website}}organizations/<span id="insert"></span></small></p>
+          <input type="text" name="title" id="title" class="form-control" value="">
+          <p class="help-block"><small>The contract will live at {{website}}contracts/<span id="insert"></span></small></p>
         </div>
       </div>
     </div>
     <div class="col-md-5">
      <div style="padding-top: 30px"></div>
      <div   >
-      <samp>Organization accounts allow your team to plan, build, review, and ship your system design — all while tracking changes and discussing ideas.</samp>
     </div>
   </div>
 </div><hr>
 <div class="row">
   <div class="col-md-7">
     <div class="form-group">
-      <label for="email" class="col-md-12">Billing email</label>
+      <label for="email" class="col-md-12">Contact email</label>
       <div class="col-md-12">
         <input type="email" name="email" id="email" class="form-control" value="">
         <p class="help-block"><small>Receipts will be sent here</small></p>
@@ -62,9 +60,11 @@
     </div>
   </div>
 </div> <hr>
+<!--
 <div class="row">
   <div class="col-md-7">
     <!-- Multiple Radios -->
+    <!--
     <div class="form-group">
       <label for="radios" class="col-md-12">Choose your plan</label>
       <div class="col-md-12">
@@ -135,11 +135,13 @@
       <h5>Choose your payment method</h5>
       <div>
         <!-- Nav tabs -->
+        <!--
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#Credit" aria-controls="Credit" role="tab" data-toggle="tab">Credit Card</a></li>
           <li role="presentation"><a href="#Paypal" aria-controls="Paypal" role="tab" data-toggle="tab">Paypal</a></li>
         </ul>
         <!-- Tab panes -->
+        <!--
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="Credit">
            <p></p>
@@ -175,16 +177,16 @@
    <samp>This business — not <strong>{{user.username}}</strong> (your user account), will own and/or control any content posted to the organization account </samp>
  </div>
 </div> 
-</div> <hr>
+</div> <hr> -->
 <div class="row">
   <div class="col-md-7">
     <p>
-      By clicking on "Create organization" below, you are agreeing to the <a href="/terms">Terms of Service</a> and the <a href="/privacy">Privacy Policy</a>.
+      By clicking on "Post Contract" below, you are agreeing to the <a href="/terms">Terms of Service</a> and the <a href="/privacy">Privacy Policy</a>.
     </p>
   </div>
 </div><hr>
 <div style="padding-bottom: 55px">
-  <button type="submit" id="submits" class="btn btn-success">Create Organization</button>
+  <button type="submit" id="submits" class="btn btn-success">Post Contract</button>
 </div>
 </form>
 </div>
@@ -194,7 +196,7 @@
 
 
 
-
+<!-- Braintree (Real money payments)
   <meta charset="utf-8">
   <script src="https://js.braintreegateway.com/web/dropin/1.4.0/js/dropin.min.js"></script>
  
@@ -308,4 +310,4 @@ checkout.teardown(function () {
 })
 
 
-</script>
+</script> -->

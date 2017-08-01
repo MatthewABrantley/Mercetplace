@@ -26,7 +26,7 @@ var website = myModule.website
 var repo = myModule.repo
 
 ////////////////////////////////////////////
-/////  GO TO PAGE NEW contract    ///// 
+/////  GO TO PAGE NEW CONTRACT        ///// 
 //////////////////////////////////////////
 exports.newcont = function(req, res) {
     //Perform Routing for Varios user type on the home page.
@@ -45,7 +45,7 @@ exports.newcont = function(req, res) {
   }; 
 
 ///////////////////////////////////////////////
-///////   CREATE contract STATIC  ////////
+///////   CREATE CONTRACT STATIC      ////////
 /////////////////////////////////////////////
 exports.createcontstatic = function(req, res) {
 //console.log('//////////////////////////////////////////')
@@ -53,7 +53,7 @@ exports.createcontstatic = function(req, res) {
 // console.log('////////////////////////////////////////')
 //Allow for new credit cards every time , Do not call old CC details.	
 if (req.user) {
-  req.assert('name', 'Username cannot be blank').notEmpty();
+  req.assert('title', 'Title cannot be blank').notEmpty();
   req.assert('email', 'Please ensure that the email address is valid.').isEmail();
   req.assert('email', 'Please ensure that the email address is included.').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
@@ -63,14 +63,14 @@ if (req.user) {
    return res.redirect('/contracts/new');
  }
     //check the user name for duplicate.
-    contractModel.findOne({ 'entry.name': req.body.name }, function(err, username) {
-    	if (username) {
-    		req.flash('error', { msg: 'The contract name you have entered is already associated with another account.' });
+    contractModel.findOne({ 'entry.title': req.body.name }, function(err, title) {
+    	if (title) {
+    		req.flash('error', { msg: 'The contract name you have entered already exists' });
     		return res.redirect('/contracts/new');
     	}
       var temp = {}
       temp['entry'] ={
-        name: req.body.name,
+        title: req.body.title,
         email: req.body.email,
         password: req.body.password,
         owner : req.user.username,
