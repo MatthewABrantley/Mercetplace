@@ -51,6 +51,7 @@ expressjs
 
 <h3>Arch Linux</h3>
 <pre>
+* Install dependencies above
 * Clone the repo
 * Create your own .env file or get it from Raltrwx
 * Install the mongodb package

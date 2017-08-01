@@ -72,13 +72,14 @@ if (req.user) {
       temp['entry'] ={
         title: req.body.title,
         email: req.body.email,
+        discord: req.body.discord,
         password: req.body.password,
         owner : req.user.username,
         members : ''
       }        
       user = new contractModel(temp);
       user.save(function(err) {
-        res.redirect('/contracts/'+req.body.name);
+        res.redirect('/contracts/'+req.body.title);
       });
     });
   } else {
@@ -373,7 +374,7 @@ exports.leaveorganiztion = function(req, res) {
 };
 
 ////////////////////////////////////////////
-//////////  contract KICK  ////////////
+//////////  contract KICK      ////////////
 //////////////////////////////////////////
 exports.kickorg = function(req, res) {
   console.log('entering')
@@ -405,7 +406,7 @@ exports.kickorg = function(req, res) {
 
 
 ////////////////////////////////////////////
-//////////  contract DELETE  ////////////
+//////////  contract DELETE    ////////////
 //////////////////////////////////////////
 exports.deleteorganiztion = function(req, res) {
   if (req.user) {
@@ -421,7 +422,7 @@ exports.deleteorganiztion = function(req, res) {
 
 
 ////////////////////////////////////////////////////////////////
-//////////  contract APPROVE USER JOIN REQUEST  ///////////
+//////////  contract APPROVE USER JOIN REQUEST      ///////////
 //////////////////////////////////////////////////////////////
 exports.approvereq = function(req, res) {
   if (req.user) {

@@ -7,7 +7,7 @@
  <table class="table table-bordered" id="contract">
   <thead>
     <tr>
-      <th>contracts</th>
+      <th>All Contracts</th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +20,7 @@
               {{#if this.entry.picture}}
               <div class="media-left media-middle">
                 <a href="#">
-                  <a href="/contracts/{{this.entry.name}}">
+                  <a href="/contracts/{{this.entry.title}}">
                     <img onerror="this.src='{{this.gravatar}}'" src="{{this.entry.picture}}" class="media-object" style="max-width: 65px;border-radius: 2px;border: 1px;border-color: #d8d8d8;border-style: solid;">
                   </a>
                 </a>
@@ -28,7 +28,7 @@
               {{else}}
               <div class="media-left media-middle">
                 <a href="#">
-                  <a href="/contracts/{{this.entry.name}}">
+                  <a href="/contracts/{{this.entry.title}}">
                     <img src="{{this.gravatar}}" class="media-object" style="max-width: 65px;border-radius: 2px;border: 1px;border-color: #d8d8d8;border-style: solid;">
                   </a>
                 </a>
@@ -40,9 +40,9 @@
             <div class="row">
               <div class="col-md-3">
                 {{#if this.entry.displayname}}
-                <a href="/contracts/{{this.entry.name}}"><h4>{{this.entry.displayname}}</h4></a>
+                <a href="/contracts/{{this.entry.title}}"><h4>{{this.entry.displaytitle}}</h4></a>
                 {{else}}
-                <a href="/contracts/{{this.entry.name}}"><h4>{{this.entry.name}}</h4></a>
+                <a href="/contracts/{{this.entry.title}}"><h4>{{this.entry.title}}</h4></a>
                 {{/if}}
                 {{#if this.entry.owner}}
                  Owned by : <a style="color:grey" href="/users/{{this.entry.owner}}">{{this.entry.owner}}</a>

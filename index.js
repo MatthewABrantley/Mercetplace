@@ -229,6 +229,8 @@ app.get('/orguserread', organizationController.orguserread); // Get the active u
 app.get('/contracts', contractController.contlist);
 app.get('/contracts/new', contractController.newcont);
 app.post('/contracts/new', contractController.createcontstatic);
+// Most likely next needed functions //
+// Breaks application: app.put('/contracts/:conttitle', userController.ensureAuthenticated, organizationController.organizationpermission, contractController.contPut);
 
 
 
