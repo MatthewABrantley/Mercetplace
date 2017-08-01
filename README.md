@@ -49,11 +49,13 @@ expressjs
 </pre>
 <h3>In more detail.</h3>
 
-<h3>Linux</h3>
+<h3>Arch Linux</h3>
 <pre>
 * Clone the repo
 * Create your own .env file or get it from Raltrwx
-* cd to the folder in terminal
+* Install the mongodb package
+* run: systemctl start mongodb && systemctl enable mongodb
+* cd to the repo folder in terminal
 * node index.js
 * open localhost:3000
 </pre>
