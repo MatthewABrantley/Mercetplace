@@ -1,0 +1,24 @@
+{
+  "name": "Mercetplace",
+  "description": "",
+  "sitename" : "Mercetplace",
+  "website" : "https://mercetplace.ngrok.io",
+  "repo" : "https://github.com/Raltrwx/Mercetplace",
+  "scripts": {
+  },
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
