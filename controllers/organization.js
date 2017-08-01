@@ -29,7 +29,7 @@ var repo = myModule.repo
 /////  GO TO PAGE NEW ORGANIZATION    ///// 
 //////////////////////////////////////////
 exports.neworg = function(req, res) {
-    //Perform Routing for Varios user type on the home page.
+    //Perform Routing for Various user type on the home page.
     if (req.user) {
       //Create client token for Braintree payments.
       gateway.clientToken.generate({}, function (err, response) {
@@ -45,7 +45,7 @@ exports.neworg = function(req, res) {
   }; 
 
 ///////////////////////////////////////////////
-///////   CREATE ORGaNIZATION STATIC  ////////
+///////   CREATE ORGANIZATION STATIC  ////////
 /////////////////////////////////////////////
 exports.createorgstatic = function(req, res) {
 //console.log('//////////////////////////////////////////')
@@ -87,7 +87,7 @@ if (req.user) {
 }
 
 ////////////////////////////////////////////
-////////// PROFILE ORGANIATION ////////////
+////////// PROFILE ORGANIZATION ////////////
 //////////////////////////////////////////
 exports.orgprofile = function(req, res) {
     //check the user name for duplicate.

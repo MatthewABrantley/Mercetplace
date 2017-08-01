@@ -227,6 +227,8 @@ app.get('/orguserread', organizationController.orguserread); // Get the active u
 ///////////////////////////////////
 //Static
 app.get('/contracts', contractController.contlist);
+app.get('/organizations/new', contractController.newcont);
+app.post('/organizations/new', contractController.createcontstatic);
 
 
 

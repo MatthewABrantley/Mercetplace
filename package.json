@@ -1,7 +1,7 @@
 {
-  "name": "Fraternate",
-  "version": "1.0.0",
-  "description": "My app description",
+  "name": "Mercetplace",
+  "version": "0.0.2",
+  "description": "Mercenary Marketplace for Albion Online",
   "scripts": {
     "deploy": "npm test && git push heroku master",
     "start": "node server.js"

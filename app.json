@@ -1,7 +1,7 @@
 {
-  "name": "Mercetplace",
+  "name": "MercetPlace",
   "description": "",
-  "sitename" : "Mercetplace",
+  "sitename" : "MercetPlace",
   "website" : "https://mercetplace.ngrok.io",
   "repo" : "https://github.com/Raltrwx/Mercetplace",
   "scripts": {

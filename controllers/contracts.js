@@ -1,4 +1,4 @@
-var contractalModel      = require('../models/contracts.js');
+var contractModel      = require('../models/contracts.js');
 var User = require('../models/User');
 var ObjectId = require('mongodb').ObjectID;
 var express = require('express');
@@ -63,9 +63,9 @@ if (req.user) {
    return res.redirect('/contracts/new');
  }
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.body.name }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.body.name }, function(err, username) {
     	if (username) {
-    		req.flash('error', { msg: 'The contractal name you have entered is already associated with another account.' });
+    		req.flash('error', { msg: 'The contract name you have entered is already associated with another account.' });
     		return res.redirect('/contracts/new');
     	}
       var temp = {}
@@ -76,7 +76,7 @@ if (req.user) {
         owner : req.user.username,
         members : ''
       }        
-      user = new contractalModel(temp);
+      user = new contractModel(temp);
       user.save(function(err) {
         res.redirect('/contracts/'+req.body.name);
       });
@@ -146,7 +146,7 @@ exports.ajaxcontuserread = function(req, res, next) {
   if (req.user) {
     //console.log(req.user)
     var username =  req.user.username
-    var query1 = contractalModel.find(
+    var query1 = contractModel.find(
       {$or: [
         {"entry.members": username },
         {"entry.owner":  username }
@@ -218,7 +218,7 @@ exports.settings = function(req, res) {
 /////////////////////////////////////
 exports.components = function(req, res) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         var ids = '58d371b01373c63dccdee169'
         var Formids = '58aa74140b9d3241280ecf17'
@@ -241,7 +241,7 @@ exports.components = function(req, res) {
 //////////////////////////////////
 exports.assemblies = function(req, res) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('orgsettings/assemblies',{
           contract : username,
@@ -260,7 +260,7 @@ exports.assemblies = function(req, res) {
 /////////////////////////////////
 exports.people = function(req, res) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('orgsettings/people',{
           owner:req.owner,
@@ -292,8 +292,8 @@ exports.orgPut = function(req, res, next) {
     req.flash('error', errors);
     res.redirect('/contracts/'+req.params.orgname+'/settings/profile');
   }
-  contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, contractItem) {
-    contractalModel.findById(contractItem._id, function (err, orgid) {
+  contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contractItem) {
+    contractModel.findById(contractItem._id, function (err, orgid) {
       if (err) return handleError(err);
       if (orgid) { 
         //Profile Picture saving.
@@ -335,7 +335,7 @@ exports.orgPut = function(req, res, next) {
 //////////  contract LIST ////////////
 /////////////////////////////////////////
 exports.contlist = function(req, res) {
-  contractalModel.find(  function(err, username) {
+  contractModel.find(  function(err, username) {
     res.render('contlist',{
       username : username,
       pagetitle: 'Contracts | '+sitename+'',
@@ -348,7 +348,7 @@ exports.contlist = function(req, res) {
 //////////////////////////////////////////
 exports.leaveorganiztion = function(req, res) {
   if (req.user) {
-    contractalModel.findOne( {"entry.name" : req.params.ids}, function(err, contract) {
+    contractModel.findOne( {"entry.name" : req.params.ids}, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
       if (temp.owner == req.user.username) {
         temp.owner = ''
@@ -378,7 +378,7 @@ exports.leaveorganiztion = function(req, res) {
 exports.kickorg = function(req, res) {
   console.log('entering')
   if (req.user) {
-    contractalModel.findOne( {"entry.name" : req.params.orgname}, function(err, contract) {
+    contractModel.findOne( {"entry.name" : req.params.orgname}, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
       if (temp.owner == req.user.username) {
         var tempArry =[]  
@@ -409,7 +409,7 @@ exports.kickorg = function(req, res) {
 //////////////////////////////////////////
 exports.deleteorganiztion = function(req, res) {
   if (req.user) {
-    contractalModel.remove( {"_id" : req.params.ids}, function(err) {
+    contractModel.remove( {"_id" : req.params.ids}, function(err) {
       if(err){console.log('Error Here'); return;} 
       req.flash('success', { msg: 'contract deleted.' });
       res.redirect('/users/'+req.user.username);
@@ -425,7 +425,7 @@ exports.deleteorganiztion = function(req, res) {
 //////////////////////////////////////////////////////////////
 exports.approvereq = function(req, res) {
   if (req.user) {
-    var query1 = contractalModel.findOne(
+    var query1 = contractModel.findOne(
       {"entry.name":  req.params.orgname }
       )
     query1.exec(function (err, query1_return) {
@@ -493,10 +493,10 @@ exports.usercontracts = function(req, res, next) {
       req.params.username = req.user.username
     }
   }
-  var query1 = contractalModel.find(
+  var query1 = contractModel.find(
     {"entry.owner":  req.params.username }
     )
-  var query2 = contractalModel.find(
+  var query2 = contractModel.find(
     {"entry.members": req.params.username }
     )
   query1.exec(function (err, query1_return) {
@@ -518,7 +518,7 @@ exports.usercontracts = function(req, res, next) {
 exports.contractpermission = function(req, res, next) {
   //Work around for the home controller with out paramater request
   if (req.user) { 
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
       //Check if this user is an owner of this contract
       if (contract.entry.owner) {
         if (contract.entry.owner == req.user.username) {
@@ -553,7 +553,7 @@ exports.contractpermission = function(req, res, next) {
 /////////////////////////////////////////////////
 exports.orgsharerequest = function(req, res, next) {
   if (req.user) {
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
       if (temp['requests']) {
         temp['requests'].push(req.user.username)
@@ -573,10 +573,10 @@ exports.orgsharerequest = function(req, res, next) {
 };
 
 ////////////////////////////////////////////////////////////////////
-//////////  contractAL OWNER GET FULL USER DETAILS  ///////////
+//////////  contract OWNER GET FULL USER DETAILS  ///////////
 //////////////////////////////////////////////////////////////////
 exports.orgowneruserdetail = function(req, res, next) {
-  contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
+  contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
     if(err){console.log('Error Here'); return;} 
     if (contract) {
      User.findOne({ 'username': contract.entry.owner }).exec(function(err, user) {
@@ -609,7 +609,7 @@ exports.usersearch = function(req, res) {
    req.sanitize('username').escape();
    req.sanitize('username').trim();
    var myExp = new RegExp(req.param('username'), 'i');
-   contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) { 
+   contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) { 
      var query1 = User.find(
       {"username" : {
         $regex : myExp,

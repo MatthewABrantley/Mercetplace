@@ -38,7 +38,7 @@ Gitflow workflow is used, clone the develop branch and merge/pr any work in plea
 
 
 <h3>Installation Instructions</h3>
-<p>If you would like to install Fraternate on your local development machine Fraternate requires the following components:</p>
+<p>If you would like to install or contribute to Mercetplace, your local development machine requirements are the following components:</p>
 
 <pre>
 Node.js
@@ -60,7 +60,7 @@ expressjs
 * open localhost:3000
 </pre>
 
-<h3>Windows</h3>
+<h3>Windows/Original Fraternate Instructions/h3>
 <p>Install Node.js Download and install from the Node.js homepage.</p>
 
 <pre><a href="https://nodejs.org/en/">https://nodejs.org/en/</a>&nbsp;</pre>
