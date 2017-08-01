@@ -28,7 +28,7 @@ var repo = myModule.repo
 ////////////////////////////////////////////
 /////  GO TO PAGE NEW contract    ///// 
 //////////////////////////////////////////
-exports.neworg = function(req, res) {
+exports.newcont = function(req, res) {
     //Perform Routing for Varios user type on the home page.
     if (req.user) {
       //Create client token for Braintree payments.
@@ -47,7 +47,7 @@ exports.neworg = function(req, res) {
 ///////////////////////////////////////////////
 ///////   CREATE contract STATIC  ////////
 /////////////////////////////////////////////
-exports.createorgstatic = function(req, res) {
+exports.createcontstatic = function(req, res) {
 //console.log('//////////////////////////////////////////')
 //console.log('//////  CREATE NEW contract  ////////')
 // console.log('////////////////////////////////////////')
@@ -91,7 +91,7 @@ if (req.user) {
 //////////////////////////////////////////
 exports.orgprofile = function(req, res) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('account/orgprofile',{
           owner:req.owner,
@@ -117,9 +117,9 @@ exports.orgprofile = function(req, res) {
 ////////////////////////////////////////////
 ////////// PROFILE ORGANIATION ////////////
 //////////////////////////////////////////
-exports.orguserread = function(req, res) {
+exports.contuserread = function(req, res) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('account/orgprofile',{
           owner:req.owner,
@@ -142,7 +142,7 @@ exports.orguserread = function(req, res) {
 ////////////////////////////////////////////
 ////////// PROFILE ORGANIATION ////////////
 //////////////////////////////////////////
-exports.ajaxorguserread = function(req, res, next) {
+exports.ajaxcontuserread = function(req, res, next) {
   if (req.user) {
     //console.log(req.user)
     var username =  req.user.username
@@ -169,7 +169,7 @@ exports.page = function(req, res) {
   if (req.orgowner) {
    var template =  req.params.page 
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('orgsettings/'+template,{
           orgowner : req.orgowner ,
@@ -194,7 +194,7 @@ exports.page = function(req, res) {
 exports.settings = function(req, res) {
   if (req.orgowner) {
     //check the user name for duplicate.
-    contractalModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('orgsettings/settings',{
           orgowner : req.orgowner ,

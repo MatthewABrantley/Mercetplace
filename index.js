@@ -56,7 +56,7 @@ mongoose.connection.on('error', function() {
 });
 
 var db = mongoose.connection;
-db.once('open', function() {
+db.once('openUri', function() {
   // we're connected!
   console.log('mongoose connection ok')
   //compile the schema for mongoose
