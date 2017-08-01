@@ -1,8 +1,8 @@
 <h1><a href="https://fraternate.herokuapp.com/" target="_blank">VIEW THE DEMO</a></h1>
 
-<h3>What is Fraternate?</h3>
-<p>Fraternate is a standalone copy of the GitHub user management system. Designed using a mongodB, NodeJS, expressjs and Handlebarsjs MVC (model view controller).</p>
-<p>Fraternate should be used as a barebones boilerplate that can be modified to integrate into your sites custom content and allowing for a complete user management system.
+<h3>What is Mercetplace?</h3>
+<p>Mercetplace is a framework based off of Fraternate which is a standalone copy of the GitHub user management system. Designed using a mongodB, NodeJS, expressjs and Handlebarsjs MVC (model view controller).</p>
+<p>Fraternatewas used as a barebones boilerplate allowing for a complete user management system.
 This website has a direct copy hosted on GitHub to allow users to copy the functionality directly. </p>
 <p>Follow the installation instructions to download, create a local deployment and begin development of your app with prebuilt user and organizational control. Including commercial integration to allow for paid subscription services.</p>
 
@@ -37,6 +37,7 @@ Fraternate is completely open source.
 
 
 
+
 <h3>Installation Instructions</h3>
 <p>If you would like to install Fraternate on your local development machine Fraternate requires the following components:</p>
 
@@ -48,6 +49,13 @@ NPM
 expressjs
 </pre>
 <h3>In more detail.</h3>
+
+<h3>Linux</h3>
+* Clone the repo
+* Create your own .env file or get it from Raltrwx
+* cd to the folder in terminal
+* node index.js
+* open localhost:3000
 
 <p>Install Node.js Download and install from the Node.js homepage.</p>
 
@@ -107,18 +115,27 @@ expressjs
 <p>All of the magic on your localhost is managed by the .ENV file , here you would add your smtp host setting , recaptcha keys etc. Some example values are shown below.</p>
 <p>When installation is done on Heroku , the keys should be added to the Settings tab , in the "reveal config variable" area.</p>
 <pre>
-SESSION_SECRET='6681esdf3a9cb922b14ff4b5b3a9b03f95ba520e017f5a23453f6e2792965d4e063'
 
+<b>See Ralt for .env details, or setup your own.</b>
+
+SESSION_SECRET=''
 MONGODB='localhost'
 
-GOOGLE_ID='942595912716-lrvbstvgdfd8em4sugjmvsu3jk6p6tgo0m74.apps.googleusercontent.com'
-GOOGLE_SECRET='9G5ZoRffKQ-cKiT9M0Ahsb2E4g'
 
-GITHUB_ID='800aa9e14a3asd6b3e981f2'
-GITHUB_SECRET='a87511fe094gdffde0b71de968691cbdb23265cf4f0'
+GOOGLE_ID=''
+GOOGLE_SECRET=''
 
-SITE_KEY='6Le2aCcUAAAAAO8g693sddE9uMACIv7L-DeAbDZc67-'
-SECRET_KEY='6Le2aCcUAAAAANzOY5iqXP94Kc76sas8FsZr1kxBMMZ'
+
+GITHUB_ID=''
+GITHUB_SECRET=''
+
+
+SITE_KEY=''
+SECRET_KEY=''
+
+MERCHANTID=''
+PUBLICKEY=''
+PRIVATEKEY=''
 
 MAIL_PORT='451'
 MAIL_USERNAME='bla@bla.com'
