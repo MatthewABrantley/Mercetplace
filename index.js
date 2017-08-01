@@ -23,7 +23,7 @@ var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
 var userInterfaceController = require('./controllers/userinterface');
 var organizationController = require('./controllers/organization');
-var contractController = require('./controllers/contracts');
+var contractController = require('./controllers/contract');
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -173,7 +173,7 @@ app.locals.repo = repo
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////
-////       TEMPALTES        //// 
+////       TEMPLATES        //// 
 ///////////////////////////////
 app.get('/privacy', userInterfaceController.privacy);
 app.get('/terms', userInterfaceController.terms);

@@ -33,7 +33,7 @@ exports.newcont = function(req, res) {
     if (req.user) {
       //Create client token for Braintree payments.
       gateway.clientToken.generate({}, function (err, response) {
-       res.render('neworg',{
+       res.render('newcont',{
         pagetitle: 'New contract | '+sitename ,
         clientToken : response.clientToken
       })
@@ -49,7 +49,7 @@ exports.newcont = function(req, res) {
 /////////////////////////////////////////////
 exports.createcontstatic = function(req, res) {
 //console.log('//////////////////////////////////////////')
-//console.log('//////  CREATE NEW contract  ////////')
+//console.log('//////    CREATE NEW CONTRACT     ////////')
 // console.log('////////////////////////////////////////')
 //Allow for new credit cards every time , Do not call old CC details.	
 if (req.user) {
