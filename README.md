@@ -33,7 +33,8 @@ Fraternate is completely open source.
 <li>Public Organization Profile</li>
 </ul>
 
-
+<h3>Development</h3>
+Gitflow workflow is used, clone the develop branch and merge/pr any work in please.
 
 
 <h3>Installation Instructions</h3>
