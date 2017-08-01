@@ -1,5 +1,3 @@
-<h1><a href="https://fraternate.herokuapp.com/" target="_blank">VIEW THE DEMO</a></h1>
-
 <h3>What is Mercetplace?</h3>
 <p>Mercetplace is a framework based off of Fraternate which is a standalone copy of the GitHub user management system. Designed using a mongodB, NodeJS, expressjs and Handlebarsjs MVC (model view controller).</p>
 <p>Fraternatewas used as a barebones boilerplate allowing for a complete user management system.
@@ -51,12 +49,15 @@ expressjs
 <h3>In more detail.</h3>
 
 <h3>Linux</h3>
+<pre>
 * Clone the repo
 * Create your own .env file or get it from Raltrwx
 * cd to the folder in terminal
 * node index.js
 * open localhost:3000
+</pre>
 
+<h3>Windows</h3>
 <p>Install Node.js Download and install from the Node.js homepage.</p>
 
 <pre><a href="https://nodejs.org/en/">https://nodejs.org/en/</a>&nbsp;</pre>
