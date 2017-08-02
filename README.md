@@ -52,12 +52,13 @@ expressjs
 <h3>Arch Linux</h3>
 <pre>
 * Install NPM & MongoDB
+* npm install -g nodemon
 * Clone the repo
 * Create your own .env file or get it from Raltrwx
 * Install the mongodb package
 * run: systemctl start mongodb && systemctl enable mongodb
 * cd to the repo folder in terminal
-* node index.js
+* nodemon
 * open localhost:3000
 </pre>
 

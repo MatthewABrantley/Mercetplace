@@ -73,6 +73,7 @@ if (req.user) {
         title: req.body.title,
         email: req.body.email,
         discord: req.body.discord,
+        description: req.body.description,
         password: req.body.password,
         owner : req.user.username,
         members : ''
@@ -90,7 +91,7 @@ if (req.user) {
 ////////////////////////////////////////////
 ////////// PROFILE ORGANIATION ////////////
 //////////////////////////////////////////
-exports.orgprofile = function(req, res) {
+exports.contprofile = function(req, res) {
     //check the user name for duplicate.
     contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
@@ -149,13 +150,13 @@ exports.ajaxcontuserread = function(req, res, next) {
     var username =  req.user.username
     var query1 = contractModel.find(
       {$or: [
-        {"entry.members": username },
-        {"entry.owner":  username }
+        {"entry.owner": username },
+        {"entry.members":  username }
         ]}
         )
     query1.exec(function (err, query1_return) {
       if(err){console.log('Error Here'); return;} 
-      req.userorgs = query1_return
+      req.usercont = query1_return
       next();
     })
   } else {
@@ -170,7 +171,7 @@ exports.page = function(req, res) {
   if (req.orgowner) {
    var template =  req.params.page 
     //check the user name for duplicate.
-    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.title': req.params.orgname }, function(err, username) {
       if (username) {
         res.render('orgsettings/'+template,{
           orgowner : req.orgowner ,
@@ -408,11 +409,11 @@ exports.kickorg = function(req, res) {
 ////////////////////////////////////////////
 //////////  contract DELETE    ////////////
 //////////////////////////////////////////
-exports.deleteorganiztion = function(req, res) {
+exports.deletecontract = function(req, res) {
   if (req.user) {
     contractModel.remove( {"_id" : req.params.ids}, function(err) {
       if(err){console.log('Error Here'); return;} 
-      req.flash('success', { msg: 'contract deleted.' });
+      req.flash('success', { msg: 'Contract deleted.' });
       res.redirect('/users/'+req.user.username);
     })
   } else {
@@ -576,8 +577,8 @@ exports.orgsharerequest = function(req, res, next) {
 ////////////////////////////////////////////////////////////////////
 //////////  contract OWNER GET FULL USER DETAILS  ///////////
 //////////////////////////////////////////////////////////////////
-exports.orgowneruserdetail = function(req, res, next) {
-  contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
+exports.contowneruserdetail = function(req, res, next) {
+  contractModel.findOne({ 'entry.title': req.params.orgname }, function(err, contract) {
     if(err){console.log('Error Here'); return;} 
     if (contract) {
      User.findOne({ 'username': contract.entry.owner }).exec(function(err, user) {

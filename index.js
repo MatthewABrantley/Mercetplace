@@ -14,6 +14,7 @@ var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
 
+
 // Load environment variables from .env file
 dotenv.load();
 
@@ -233,6 +234,7 @@ app.post('/contracts/new', contractController.createcontstatic);
 // Most likely next needed Contract functions //
 
 // This is what routes the display of an individual page for a contract, need to make this entire thing work. Refer to line#205 for how organizations do it and trace the logic 
+app.get('/contracts/:conttitle/', contractController.ajaxcontuserread, contractController.contowneruserdetail)
 //app.get('/organizations/:contname/', contractController.ajaxorguserread ,  contractController.organizationpermission,  contractController.orgowneruserdetail,  contractController.orgprofile);
 
 // Breaks application: app.put('/contracts/:conttitle', userController.ensureAuthenticated, organizationController.organizationpermission, contractController.contPut);

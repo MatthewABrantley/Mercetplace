@@ -67,7 +67,29 @@
 	</div>
 	<div class="col-md-5">
 		<h3>Your Contracts?</h3>
-		<div class="dotted" style="height: 355">Maybe one day a list of your contracts over here? Use the All organizations listed below as a model? 
+		<div class="dotted" style="height: 355">
+		{{#if contracts}}
+		<h3>Organizations <small>All of your Contracts are listed below.</small></h3>
+		<div class="row" style="padding-top: 15px">
+			{{#each title}}
+			<div class="col-md-1 col-xs-2">
+				<a href="/contracts/{{this.entry.title}}" title="{{this.entry.title}}"  >
+					{{#if this.title.picture}}
+					<img  onerror="this.src='{{this.gravatar}}'"" src="{{this.entry.picture}}" class="media-object" style="max-width: 55px;border-radius: 2px;border: 1px;border-color: #d8d8d8;border-style: solid;">
+					{{else}}
+					<img src="{{this.gravatar}}" class="media-object" class="media-object" style="max-width: 55px;border-radius: 2px;border: 1px;border-color: #d8d8d8;border-style: solid;">
+					{{/if}}       
+				</a>
+			</div>
+			{{/each}}
+			</div>
+		{{else}}
+		<h3>Contracts</h3>
+		<div style="border-width: 1px; border-style: dashed; border-color: grey;padding:15px;border-radius: 5px;">
+			<p>No Contracts found </p>
+			<a class="btn btn-success btn-xl" href="/contracts/new"><i class="fa fa-plus" aria-hidden="true"></i> Post a Contract</a> 
+		</div>
+		{{/if}} 
 		</div>
 		<p></p>  
 	<!--	<div class="awesome">
