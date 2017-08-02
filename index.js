@@ -229,7 +229,12 @@ app.get('/orguserread', organizationController.orguserread); // Get the active u
 app.get('/contracts', contractController.contlist);
 app.get('/contracts/new', contractController.newcont);
 app.post('/contracts/new', contractController.createcontstatic);
-// Most likely next needed functions //
+
+// Most likely next needed Contract functions //
+
+// This is what routes the display of an individual page for a contract, need to make this entire thing work. Refer to line#205 for how organizations do it and trace the logic 
+//app.get('/organizations/:contname/', contractController.ajaxorguserread ,  contractController.organizationpermission,  contractController.orgowneruserdetail,  contractController.orgprofile);
+
 // Breaks application: app.put('/contracts/:conttitle', userController.ensureAuthenticated, organizationController.organizationpermission, contractController.contPut);
 
 
