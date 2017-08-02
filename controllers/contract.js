@@ -73,6 +73,7 @@ if (req.user) {
         title: req.body.title,
         email: req.body.email,
         discord: req.body.discord,
+        organization: req.body.organization,
         description: req.body.description,
         password: req.body.password,
         owner : req.user.username,

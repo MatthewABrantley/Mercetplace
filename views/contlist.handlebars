@@ -44,6 +44,9 @@
                 {{else}}
                 <a href="/contracts/{{this.entry.title}}"><h4>{{this.entry.title}}</h4></a>
                 {{/if}}
+                {{#if this.entry.organization}}
+                Organization: <a style="color:grey" href="organizations/{{this.entry.organization}}">{{this.entry.organization}}</a>
+                {{/if}}
                 {{#if this.entry.owner}}
                  Owned by : <a style="color:grey" href="/users/{{this.entry.owner}}">{{this.entry.owner}}</a>
                 {{/if}}
