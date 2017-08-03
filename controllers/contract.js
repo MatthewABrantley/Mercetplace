@@ -169,7 +169,7 @@ exports.ajaxcontuserread = function(req, res, next) {
 //////////  PAGE ////////////
 ////////////////////////////
 exports.page = function(req, res) {
-  if (req.orgowner) {
+  if (req.contowner) {
    var template =  req.params.page 
     //check the user name for duplicate.
     contractModel.findOne({ 'entry.title': req.params.orgname }, function(err, username) {
@@ -195,7 +195,7 @@ exports.page = function(req, res) {
 ////////// SETTINGS PAGE ///////////
 ///////////////////////////////////
 exports.settings = function(req, res) {
-  if (req.orgowner) {
+  if (req.contowner) {
     //check the user name for duplicate.
     contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
       if (username) {
@@ -221,16 +221,16 @@ exports.settings = function(req, res) {
 /////////////////////////////////////
 exports.components = function(req, res) {
     //check the user name for duplicate.
-    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.title': req.params.contname }, function(err, username) {
       if (username) {
         var ids = '58d371b01373c63dccdee169'
         var Formids = '58aa74140b9d3241280ecf17'
-        res.render('orgsettings/components', {
+        res.render('contsettings/components', {
           siteName : siteName,
           items : JSON.stringify(ids),
           Formids : JSON.stringify(Formids),
           contract : username,
-          contracts : req.userorgs ,
+          contracts : req.usercont ,
           title: 'Components | '+username.entry.name   ,
         });
       } else {
@@ -244,11 +244,11 @@ exports.components = function(req, res) {
 //////////////////////////////////
 exports.assemblies = function(req, res) {
     //check the user name for duplicate.
-    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, username) {
+    contractModel.findOne({ 'entry.name': req.params.contname }, function(err, username) {
       if (username) {
-        res.render('orgsettings/assemblies',{
+        res.render('contsettings/assemblies',{
           contract : username,
-          contracts : req.userorgs ,
+          contracts : req.usercont ,
           title: 'Assemblies | '+username.entry.name   ,
         }
         )
@@ -335,7 +335,7 @@ exports.orgPut = function(req, res, next) {
 };
 
 ///////////////////////////////////////////
-//////////  contract LIST ////////////
+//////////  Contract LIST     ////////////
 /////////////////////////////////////////
 exports.contlist = function(req, res) {
   contractModel.find(  function(err, username) {
@@ -349,7 +349,7 @@ exports.contlist = function(req, res) {
 ////////////////////////////////////////////
 //////////  contract LEAVE ////////////
 //////////////////////////////////////////
-exports.leaveorganiztion = function(req, res) {
+exports.leavecontract = function(req, res) {
   if (req.user) {
     contractModel.findOne( {"entry.name" : req.params.ids}, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
@@ -366,7 +366,7 @@ exports.leaveorganiztion = function(req, res) {
       temp.members = tempArry
       contract.entry = temp    
       contract.save(function(err) {
-        req.flash('success', { msg: 'You are no longer a member of the contract '+contract.entry.name+'.' });
+        req.flash('success', { msg: 'You are no longer a member of the contract '+contract.entry.title+'.' });
         res.redirect('/users/'+req.user.username+'/settings/contracts');
       });
     });
@@ -378,10 +378,10 @@ exports.leaveorganiztion = function(req, res) {
 ////////////////////////////////////////////
 //////////  contract KICK      ////////////
 //////////////////////////////////////////
-exports.kickorg = function(req, res) {
+exports.kickcont = function(req, res) {
   console.log('entering')
   if (req.user) {
-    contractModel.findOne( {"entry.name" : req.params.orgname}, function(err, contract) {
+    contractModel.findOne( {"entry.title" : req.params.title}, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
       if (temp.owner == req.user.username) {
         var tempArry =[]  
@@ -394,7 +394,7 @@ exports.kickorg = function(req, res) {
         temp.members = tempArry
         contract.entry = temp    
         contract.save(function(err) {
-          req.flash('success', { msg: req.params.username+' was successfully removed from '+contract.entry.name+'.' });
+          req.flash('success', { msg: req.params.username+' was successfully removed from '+contract.entry.title+'.' });
           res.redirect('/contracts/'+contract.entry.name+'/people' );
         });
       } else {
@@ -426,10 +426,10 @@ exports.deletecontract = function(req, res) {
 ////////////////////////////////////////////////////////////////
 //////////  contract APPROVE USER JOIN REQUEST      ///////////
 //////////////////////////////////////////////////////////////
-exports.approvereq = function(req, res) {
+exports.approvecontreq = function(req, res) {
   if (req.user) {
     var query1 = contractModel.findOne(
-      {"entry.name":  req.params.orgname }
+      {"entry.title":  req.params.title }
       )
     query1.exec(function (err, query1_return) {
       if(err){console.log('Error Here'); return;} 
@@ -483,11 +483,11 @@ query1_return.save(function(err) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Middelware -  Limit to 1 query.
+//Middleware -  Limit to 1 query.
 
 
 ////////////////////////////////////
-////////// PROFILE PAGE ////////////
+////////// CONTRACT PAGE? //////////
 ///////////////////////////////////
 exports.usercontracts = function(req, res, next) {
   //Work around for the home controller with out paramater request
@@ -521,7 +521,7 @@ exports.usercontracts = function(req, res, next) {
 exports.contractpermission = function(req, res, next) {
   //Work around for the home controller with out paramater request
   if (req.user) { 
-    contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
+    contractModel.findOne({ 'entry.title': req.params.orgname }, function(err, contract) {
       //Check if this user is an owner of this contract
       if (contract.entry.owner) {
         if (contract.entry.owner == req.user.username) {
@@ -554,7 +554,7 @@ exports.contractpermission = function(req, res, next) {
 ///////////////////////////////////////////////////
 //////////  contract SHARE REQUEST ///////////
 /////////////////////////////////////////////////
-exports.orgsharerequest = function(req, res, next) {
+exports.contsharerequest = function(req, res, next) {
   if (req.user) {
     contractModel.findOne({ 'entry.name': req.params.orgname }, function(err, contract) {
       var temp = JSON.parse(JSON.stringify(contract.entry))
@@ -607,7 +607,7 @@ exports.contowneruserdetail = function(req, res, next) {
 ////////////////////////////////
 //////////  SEARCH ////////////
 //////////////////////////////
-exports.usersearch = function(req, res) {
+exports.contsearch = function(req, res) {
   if (req.user) {
    req.sanitize('username').escape();
    req.sanitize('username').trim();
