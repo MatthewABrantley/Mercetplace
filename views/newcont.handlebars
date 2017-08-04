@@ -45,7 +45,8 @@
     </div>
     <div class="col-md-5">
      <div style="padding-top: 30px"></div>
-     <div   >
+     <samp>Contracts are a posting</samp>
+     <div>
     </div>
   </div>
 </div><hr>
@@ -248,7 +249,7 @@
         });
       });
     });
-  </script>
+  </script> -->
 
 
 
@@ -308,6 +309,22 @@
       $("#nameGroup").addClass('has-error')
       $('#submits').prop('disabled', true);
       $('#errmsg').html('Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.')
+    }
+  })
+
+  $("#title").on("keyup", function() {
+   var value = $( this ).val();
+   var invalidChars = [  ];
+   var name = new RegExp('^[A-Za-z]+$');
+    if(value.match(name)) {
+      $("#insert").html($("#title").val())
+      $('#submits').prop('disabled', false);
+      $("#titleGroup").removeClass('has-error')
+      $('#errmsg').html('')
+    } else {
+      $("#titleGroup").addClass('has-error')
+      $('#submits').prop('disabled', true);
+      $('#errmsg').html('Title may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.')
     }
   })
 
